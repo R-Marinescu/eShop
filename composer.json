@@ -1,0 +1,14 @@
+{
+  "name": "legion/test-di",
+  "require": {
+    "pimple/pimple": "^3.5",
+    "ext-pdo": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Repositories\\": "Repositories",
+      "DatabaseConfig\\": "DatabaseConfig",
+      "Controllers\\": "Controllers"
+    }
+  }
+}
