@@ -72,4 +72,25 @@ public function execute(string $statement, $params = []) {
     return $stmt;
 }
 
+    public function fetchAssocFromResult($result)
+    {
+        if ($result instanceof PDOStatement) {
+            $var = $result->fetch(PDO::FETCH_ASSOC);
+            if ($var) {
+                return $var;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * @param string $statement
+     * @param array|null $params
+     * @return mixed
+     */
+    public function fetchAssoc(string $statement, array $params = null)
+    {
+        return $this->fetchAssocFromResult($this->execute($statement, $params));
+    }
+
 }

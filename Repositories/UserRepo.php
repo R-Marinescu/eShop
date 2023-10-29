@@ -41,10 +41,15 @@ class UserRepo extends BaseRepository
         $statement = "SELECT * FROM users WHERE userId = :userId";
         $params = [':userId' => $id];
 
-        $queryResult = $this->execute($statement, $params)->fetch(PDO::FETCH_ASSOC);
+        $queryResult = $this->fetchAssoc($statement, $params);
+
+        if ($queryResult === false) {
+            return ['error' => "This id: $id does not exist"];
+        }
 
         return $queryResult;
     }
+
 
     public function selectAll() {
         $statement = "SELECT * FROM users";

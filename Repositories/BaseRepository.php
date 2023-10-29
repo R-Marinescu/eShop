@@ -33,6 +33,24 @@ abstract class BaseRepository
         }
     }
 
+    /**
+     * @param string $statement
+     * @param array|null $params
+     */
+    protected function fetchAssoc($statement, array $params = null)
+    {
+        try {
+            // Fetch the data
+            $fetchResult = $this->databaseDriver->fetchAssoc($statement, $params);
+
+            // Return the fetched data directly
+            return $fetchResult;
+        } catch (\Throwable $th) {
+            echo "An error occurred: " . $th->getMessage();
+            return null;
+        }
+    }
+
     protected function getInsertedId()
     {
         try {

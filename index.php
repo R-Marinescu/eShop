@@ -9,8 +9,11 @@ $lastName = 'Test';
 $phoneNumber = '23333323';
 $DOB = '2003-04-25';
 //$result = $testController->updateUserById($userId, $firstName, $lastName, $phoneNumber, $DOB);
-$result = $testController->deleteUserById(21);
-var_dump($result);
+$result = $testController->selectAllUsers();
+print_r($result);
+//var_dump($result);
+
+
 //$testRepo = $container['UserRepo'];
 //
 //$firstName = 'Alex';
