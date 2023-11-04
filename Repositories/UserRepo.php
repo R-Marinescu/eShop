@@ -8,7 +8,6 @@ use PDO;
 class UserRepo extends BaseRepository
 {
 
-
     public function insertUser($firstName, $lastName, $phoneNumber, $DOB)
     {
         $statement = "INSERT INTO users (firstName, lastName, phoneNumber, DOB) VALUES (:firstName, :lastName, :phoneNumber, :DOB)";
@@ -18,9 +17,16 @@ class UserRepo extends BaseRepository
             ':phoneNumber'  => $phoneNumber,
             ':DOB'          => $DOB
         ];
-        $queryResult = $this->execute($statement, $params);
 
-        return $queryResult;
+        $queryResult = $this->execute($statement, $params);
+        $affectedRows = $this->getAffectedRows();
+
+        if ($affectedRows > 0) {
+            return "Inserted $affectedRows row(s)";
+        } else {
+            echo $queryResult;
+            return " Insertion failed";
+        }
     }
 
     public function updateById($userId, $firstName, $lastName, $phoneNumber, $DOB) {
@@ -63,7 +69,11 @@ class UserRepo extends BaseRepository
         $statement = "DELETE FROM users WHERE userId = :userId";
         $params = [':userId' => $id];
 
-        return $this->execute($statement, $params);
+        $stmt = $this->execute($statement, $params);
+
+        $affectedRows = $this->getAffectedRows($stmt);
+
+        return "Deleted $affectedRows row(s) with id $id";
     }
 
 }

@@ -7,7 +7,9 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Repositories\\' => array($baseDir . '/Repositories'),
+    'Psr\\Log\\' => array($vendorDir . '/psr/log/src'),
     'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
+    'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
     'DatabaseConfig\\' => array($baseDir . '/DatabaseConfig'),
     'Controllers\\' => array($baseDir . '/Controllers'),
 );

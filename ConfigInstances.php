@@ -25,4 +25,8 @@ $container['UserController'] = function($c) {
     return new UserController($c);
 };
 
+$container['Logs'] = function($c) {
+    return new Logs($c);
+};
+
 return $container;

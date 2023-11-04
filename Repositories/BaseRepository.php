@@ -22,16 +22,16 @@ abstract class BaseRepository
         $this->databaseDriver = $container['DriverPDO'];
     }
 
-    //protected function execute($statement, ?string $marker = null)
-    protected function execute($statement, $params = [])
-    {
+    protected function execute($statement, $params = []) {
         try {
             return $this->databaseDriver->execute($statement, $params);
+        } catch (\PDOException $e) {
+            return "Database error: " . $e->getMessage();
         } catch (\Throwable $th) {
-            echo "An error occurred: " . $th->getMessage();
-            return false;
+            return "Unexpected error: " . $th->getMessage();
         }
     }
+
 
     /**
      * @param string $statement
@@ -66,6 +66,7 @@ abstract class BaseRepository
         try {
             return $this->databaseDriver->getAffectedRows();
         } catch (\Throwable $th) {
+            echo "An error occurred: " . $th->getMessage();
             //$this->logger->critical($th->getMessage(), 'getAffectedRows', 'There is no connection');
             return 0;
         }

@@ -13,7 +13,12 @@ class ComposerStaticInit3bbd4aa395f22fee75aaf156c4c0c166
         ),
         'P' => 
         array (
+            'Psr\\Log\\' => 8,
             'Psr\\Container\\' => 14,
+        ),
+        'M' => 
+        array (
+            'Monolog\\' => 8,
         ),
         'D' => 
         array (
@@ -30,9 +35,17 @@ class ComposerStaticInit3bbd4aa395f22fee75aaf156c4c0c166
         array (
             0 => __DIR__ . '/../..' . '/Repositories',
         ),
+        'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/src',
+        ),
         'Psr\\Container\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
+        ),
+        'Monolog\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
         ),
         'DatabaseConfig\\' => 
         array (

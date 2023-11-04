@@ -93,4 +93,12 @@ public function execute(string $statement, $params = []) {
         return $this->fetchAssocFromResult($this->execute($statement, $params));
     }
 
+    public function getAffectedRows() {
+
+        if (!$this->pdo) {
+            $this->initialize();
+        }
+        return $this->affectedRows;
+    }
+
 }

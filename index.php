@@ -4,12 +4,13 @@ require 'bootstrap.php';
 
 $testController = $container['UserController'];
 $userId = 21;
-$firstName = 'User';
-$lastName = 'Test';
-$phoneNumber = '23333323';
+$firstName = 'Stelios';
+$lastName = 'Mar';
+$phoneNumber = '237851';
 $DOB = '2003-04-25';
 //$result = $testController->updateUserById($userId, $firstName, $lastName, $phoneNumber, $DOB);
-$result = $testController->selectAllUsers();
+$result = $testController->saveUser($firstName, $lastName, $phoneNumber, $DOB);
+//$result = $testController->deleteUserById(26);
 print_r($result);
 //var_dump($result);
 
