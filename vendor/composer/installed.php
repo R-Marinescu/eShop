@@ -3,7 +3,7 @@
         'name' => 'legion/test-di',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '143a06f4c333f27ff934713f4c6f0352a2c806d9',
+        'reference' => '2b09bc8ea855edec61f50daddebf3e09994ff33c',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'legion/test-di' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '143a06f4c333f27ff934713f4c6f0352a2c806d9',
+            'reference' => '2b09bc8ea855edec61f50daddebf3e09994ff33c',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

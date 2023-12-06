@@ -5,10 +5,11 @@ use DatabaseConfig\DatabaseConfig;
 use DatabaseConfig\DriverPDO;
 use Repositories\UserRepo;
 use Pimple\Container;
+use Logs\Logs;
 
 require 'vendor/autoload.php';
 
-$container = new Pimple\Container();
+$container = new Container();
 
 $container['DriverPDO'] = $container->factory(function () {
     $db = new DriverPDO();
@@ -17,16 +18,16 @@ $container['DriverPDO'] = $container->factory(function () {
     return $db;
 });
 
-$container['UserRepo'] = function($c) {
-    return new UserRepo($c);
+$container['Logs'] = function ($c) {
+    return new Logs($c['DriverPDO']);
 };
 
-$container['UserController'] = function($c) {
-    return new UserController($c);
+$container['UserRepo'] = function ($c) {
+    return new UserRepo($c['DriverPDO'], $c['Logs']);
 };
 
-$container['Logs'] = function($c) {
-    return new Logs($c);
+$container['UserController'] = function ($c) {
+    return new UserController($c['UserRepo'], $c['Logs']);
 };
 
 return $container;

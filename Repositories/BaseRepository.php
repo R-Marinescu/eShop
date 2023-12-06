@@ -1,34 +1,34 @@
 <?php
+
 namespace Repositories;
 
-use Pimple\Container;
 use DatabaseConfig\DriverPDO;
+use Logs\Logs;
+use Pimple\Container;
 
 abstract class BaseRepository
 {
-    /**
-     * @var Container
-     */
-    protected mixed $container;
 
-    protected $databaseDriver;
-    /**
-     * @return void
-     */
+    protected mixed $databaseDriver;
 
-    public function __construct(Container $container)
+    protected mixed $logger;
+
+    public function __construct(DriverPDO $pdo, Logs $logger)
     {
-        $this->container = $container;
-        $this->databaseDriver = $container['DriverPDO'];
+        $this->databaseDriver = $pdo;
+        $this->logger = $logger;
     }
 
-    protected function execute($statement, $params = []) {
+    public function execute($statement, $params = [])
+    {
+
         try {
             return $this->databaseDriver->execute($statement, $params);
-        } catch (\PDOException $e) {
-            return "Database error: " . $e->getMessage();
+
         } catch (\Throwable $th) {
-            return "Unexpected error: " . $th->getMessage();
+            $errorMessage = "Query statement: $statement - Error: " . $th->getMessage();
+            $this->logger->logError($errorMessage);
+            return false;
         }
     }
 
@@ -66,8 +66,8 @@ abstract class BaseRepository
         try {
             return $this->databaseDriver->getAffectedRows();
         } catch (\Throwable $th) {
-            echo "An error occurred: " . $th->getMessage();
-            //$this->logger->critical($th->getMessage(), 'getAffectedRows', 'There is no connection');
+            $errorMessage = "An error occurred: " . $th->getMessage();
+            $this->logger->logError($errorMessage);
             return 0;
         }
     }

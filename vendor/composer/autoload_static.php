@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit3bbd4aa395f22fee75aaf156c4c0c166
+class ComposerStaticInit933c7763c7fa9fd2d43c33233de2f51b
 {
     public static $prefixLengthsPsr4 = array (
         'R' => 
@@ -19,6 +19,14 @@ class ComposerStaticInit3bbd4aa395f22fee75aaf156c4c0c166
         'M' => 
         array (
             'Monolog\\' => 8,
+        ),
+        'L' => 
+        array (
+            'Logs\\' => 5,
+        ),
+        'E' => 
+        array (
+            'Entities\\' => 9,
         ),
         'D' => 
         array (
@@ -47,6 +55,14 @@ class ComposerStaticInit3bbd4aa395f22fee75aaf156c4c0c166
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
         ),
+        'Logs\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Logs',
+        ),
+        'Entities\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Entities',
+        ),
         'DatabaseConfig\\' => 
         array (
             0 => __DIR__ . '/../..' . '/DatabaseConfig',
@@ -74,10 +90,10 @@ class ComposerStaticInit3bbd4aa395f22fee75aaf156c4c0c166
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit3bbd4aa395f22fee75aaf156c4c0c166::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit3bbd4aa395f22fee75aaf156c4c0c166::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit3bbd4aa395f22fee75aaf156c4c0c166::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit3bbd4aa395f22fee75aaf156c4c0c166::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit933c7763c7fa9fd2d43c33233de2f51b::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit933c7763c7fa9fd2d43c33233de2f51b::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit933c7763c7fa9fd2d43c33233de2f51b::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit933c7763c7fa9fd2d43c33233de2f51b::$classMap;
 
         }, null, ClassLoader::class);
     }

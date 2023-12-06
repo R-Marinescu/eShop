@@ -10,6 +10,8 @@ return array(
     'Psr\\Log\\' => array($vendorDir . '/psr/log/src'),
     'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
+    'Logs\\' => array($baseDir . '/Logs'),
+    'Entities\\' => array($baseDir . '/Entities'),
     'DatabaseConfig\\' => array($baseDir . '/DatabaseConfig'),
     'Controllers\\' => array($baseDir . '/Controllers'),
 );

@@ -10,7 +10,7 @@ public const PARAMS = [
         "host" => 'localhost',
         "username" => 'root',
         "password" => '12345678',
-        "database" => 'airtickets',
+        "database" => 'eshop',
         "charset" => 'utf8mb4'
     ]
 ];

@@ -2,78 +2,89 @@
 
 namespace Repositories;
 
-use DatabaseConfig\DatabaseConfig;
+use DatabaseConfig\DriverPDO;
+use Entities\User;
+use Logs\Logs;
 use PDO;
+use Pimple\Container;
 
 class UserRepo extends BaseRepository
 {
 
-    public function insertUser($firstName, $lastName, $phoneNumber, $DOB)
+    public function __construct(DriverPDO $pdo, Logs $logger)
     {
-        $statement = "INSERT INTO users (firstName, lastName, phoneNumber, DOB) VALUES (:firstName, :lastName, :phoneNumber, :DOB)";
+        parent::__Construct($pdo, $logger);
+    }
+
+    public function insertUser(User $user)
+    {
+
+        $statement = "INSERT INTO users (FirstName, LastName, PhoneNumber) VALUES (:FirstName, :LastName, :PhoneNumber)";
         $params = [
-            ':firstName'    => $firstName,
-            ':lastName'     => $lastName,
-            ':phoneNumber'  => $phoneNumber,
-            ':DOB'          => $DOB
+            ':FirstName' => $user->getFirstName(),
+            ':LastName' => $user->getLastName(),
+            ':PhoneNumber' => $user->getPhoneNumber(),
         ];
 
-        $queryResult = $this->execute($statement, $params);
-        $affectedRows = $this->getAffectedRows();
-
-        if ($affectedRows > 0) {
-            return "Inserted $affectedRows row(s)";
-        } else {
-            echo $queryResult;
-            return " Insertion failed";
-        }
+        return $this->execute($statement, $params);
     }
 
-    public function updateById($userId, $firstName, $lastName, $phoneNumber, $DOB) {
-        $statement = "UPDATE users SET firstName = :firstName, lastName = :lastName, phoneNumber = :phoneNumber, DOB = :DOB WHERE userId = :userId";
+    public function updateUser(User $user)
+    {
+
+        $statement = "UPDATE users SET FirstName = :FirstName, LastName = :LastName, PhoneNumber = :PhoneNumber WHERE UserId = :UserId";
         $params = [
-          ':userId'         => $userId,
-          ':firstName'      => $firstName,
-          ':lastName'       => $lastName,
-          ':phoneNumber'    => $phoneNumber,
-          ':DOB'            => $DOB
+            ':UserId' => $user->getUserId(),
+            ':FirstName' => $user->getFirstName(),
+            ':LastName' => $user->getLastName(),
+            ':PhoneNumber' => $user->getPhoneNumber(),
         ];
-        $queryResult = $this->execute($statement, $params);
-
-        return $queryResult;
+        $this->execute($statement, $params);
+        return $this->getAffectedRows();
     }
 
-    public function selectById($id) {
-        $statement = "SELECT * FROM users WHERE userId = :userId";
-        $params = [':userId' => $id];
+    public function selectById($id): ?User
+    {
 
-        $queryResult = $this->fetchAssoc($statement, $params);
+        $statement = "SELECT * FROM users WHERE UserId = :UserId";
+        $params = [':UserId' => $id];
 
-        if ($queryResult === false) {
-            return ['error' => "This id: $id does not exist"];
-        }
+        $userData = $this->fetchAssoc($statement, $params);
 
-        return $queryResult;
+        return $userData ? new User(
+            $userData['UserId'],
+            $userData['FirstName'],
+            $userData['LastName'],
+            $userData['PhoneNumber'],
+        ) : null;
     }
 
+    public function selectAll(): array
+    {
 
-    public function selectAll() {
         $statement = "SELECT * FROM users";
+        $usersData = $this->execute($statement)->fetchAll(PDO::FETCH_ASSOC);
 
-        $queryResult = $this->execute($statement)->fetchAll(PDO::FETCH_ASSOC);
-
-        return $queryResult;
+        $users = [];
+        foreach ($usersData as $userData) {
+            $users[] = new User(
+              $userData['UserId'],
+              $userData['FirstName'],
+              $userData['LastName'],
+              $userData['PhoneNumber'],
+            );
+        }
+        return $users;
     }
 
-    public function deleteById($id) {
-        $statement = "DELETE FROM users WHERE userId = :userId";
-        $params = [':userId' => $id];
+    public function deleteById($id)
+    {
+        $statement = "DELETE FROM users WHERE UserId = :UserId";
+        $params = [':UserId' => $id];
 
-        $stmt = $this->execute($statement, $params);
+        $this->execute($statement, $params);
 
-        $affectedRows = $this->getAffectedRows($stmt);
-
-        return "Deleted $affectedRows row(s) with id $id";
+        return $this->getAffectedRows();
     }
 
 }

@@ -5,6 +5,8 @@
       <sourceFolder url="file://$MODULE_DIR$/DatabaseConfig" isTestSource="false" packagePrefix="DatabaseConfig\" />
       <sourceFolder url="file://$MODULE_DIR$/Repositories" isTestSource="false" packagePrefix="Repositories\" />
       <sourceFolder url="file://$MODULE_DIR$/Controllers" isTestSource="false" packagePrefix="Controllers\" />
+      <sourceFolder url="file://$MODULE_DIR$/Logs" isTestSource="false" packagePrefix="Logs\" />
+      <sourceFolder url="file://$MODULE_DIR$/Entities" isTestSource="false" packagePrefix="Entities\" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/pimple/pimple" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/psr/container" />

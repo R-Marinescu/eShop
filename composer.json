@@ -9,7 +9,9 @@
     "psr-4": {
       "Repositories\\": "Repositories",
       "DatabaseConfig\\": "DatabaseConfig",
-      "Controllers\\": "Controllers"
+      "Controllers\\": "Controllers",
+      "Logs\\": "Logs",
+      "Entities\\": "Entities"
     }
   }
 }
