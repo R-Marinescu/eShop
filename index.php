@@ -7,7 +7,7 @@ require 'bootstrap.php';
 $testController = $container['UserController'];
 $userId = 4;
 $firstName = 'Alex';
-$lastName = 'Tofanica';
+$lastName = 'Jameson';
 $phoneNumber = '11';
 
 $user = new User($userId, $firstName, $lastName, $phoneNumber);
